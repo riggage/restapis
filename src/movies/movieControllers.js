@@ -40,7 +40,7 @@ exports.updateMovie = async (req, res) => {
 exports.deleteMovie = async (req, res) => {
     try {
         const deleteMovie = await Movie.deleteOne({
-            [req.params.filterKey]: req.params.deleteVal,
+            [req.params.filterKey]: req.params.filterVal,
         });
         if (deleteMovie.deletedCount >0) {
             res.status(200).send({ msg: "Successfully deleted movie" });
