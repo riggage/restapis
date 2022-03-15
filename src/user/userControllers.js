@@ -37,3 +37,14 @@ exports.updatePassword = async (req, res) => {
     res.status(500).send({ err: error.message });
   }
 };
+
+exports.deleteUser = async (req, res) => {
+  try {
+    let result;
+    if (req.user.username === req.params.username) {
+      result = await User.deleteOne
+    }
+  } catch (error) {
+    
+  }
+}
