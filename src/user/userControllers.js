@@ -40,11 +40,19 @@ exports.updatePassword = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
-    let result;
+    let deleteCheck;
     if (req.user.username === req.params.username) {
-      result = await User.deleteOne
+      deleteCheck = await User.deleteOne({ _id: req.user._id });
+    } else {
+      throw new Error("Incorrect Credentials");
+    }
+    if (deleteCheck && deleteCheck.deletedCount > 0) {
+      res.status(200).send({ msg: "Success" });
+    } else {
+      throw new Error("Nothing deleted");
     }
   } catch (error) {
-    
+    console.log(error);
+    res.status(500).send({ err: error.message });
   }
-}
+};
